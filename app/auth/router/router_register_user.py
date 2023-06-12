@@ -1,22 +1,17 @@
 from fastapi import Depends, HTTPException, status
-
-from app.utils import AppModel
+from pydantic import BaseModel
 
 from ..service import Service, get_service
 from . import router
 
 
-class RegisterUserRequest(AppModel):
+class RegisterUserRequest(BaseModel):
     email: str
-    name: str
-    phone: str
-    city: str
     password: str
 
 
-class RegisterUserResponse(AppModel):
+class RegisterUserResponse(BaseModel):
     email: str
-    city: str
 
 
 @router.post(
