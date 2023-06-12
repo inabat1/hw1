@@ -8,17 +8,11 @@ from . import router
 
 class UpdateUserRequest(AppModel):
     email: str
-    name: str
-    city: str
-    phone: str
     password: str
 
 
 class UpdateUserResponse(AppModel):
     email: str
-    name: str
-    city: str
-    phone: str
 
 
 @router.patch(
