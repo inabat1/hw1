@@ -8,11 +8,15 @@ from . import router
 
 class RegisterUserRequest(AppModel):
     email: str
+    name: str
+    phone: str
+    city: str
     password: str
 
 
 class RegisterUserResponse(AppModel):
     email: str
+    city: str
 
 
 @router.post(
