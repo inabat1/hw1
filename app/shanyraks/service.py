@@ -1,18 +1,18 @@
 from app.config import database
 
-from .repository.repository import TweetRepository
+from .repository.repository import ShanyrakRepository
 
 
 class Service:
     def __init__(
         self,
-        repository: TweetRepository,
+        repository: ShanyrakRepository,
     ):
         self.repository = repository
 
 
 def get_service():
-    repository = TweetRepository(database)
+    repository = ShanyrakRepository(database)
 
     svc = Service(repository)
     return svc
