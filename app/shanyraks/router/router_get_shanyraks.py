@@ -17,10 +17,10 @@ class GetMyShanyraks(AppModel):
 
 
 class GetMyShanyraksResponse(AppModel):
-    tweets: List[GetMyShanyraks]
+    shanyraks: List[GetMyShanyraks]
 
 
-@router.get("/", response_model=GetMyShanyraksResponse)
+@router.get("/{id}", response_model=GetMyShanyraksResponse)
 def get_shanyraks(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
