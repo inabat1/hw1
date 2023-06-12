@@ -11,23 +11,23 @@ from ..service import Service, get_service
 from . import router
 
 
-class GetMyTweetsTweet(AppModel):
+class GetMyShanyraks(AppModel):
     id: Any = Field(alias="_id")
     content: str
 
 
-class GetMyTweetsResponse(AppModel):
-    tweets: List[GetMyTweetsTweet]
+class GetMyShanyraksResponse(AppModel):
+    tweets: List[GetMyShanyraks]
 
 
-@router.get("/", response_model=GetMyTweetsResponse)
-def get_my_tweets(
+@router.get("/", response_model=GetMyShanyraksResponse)
+def get_shanyraks(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> dict[str, str]:
     user_id = jwt_data.user_id
-    tweets = svc.repository.get_tweet_by_user_id(user_id)
+    shanyraks = svc.repository.get_shanyrak_by_user_id(user_id)
 
-    resp = {"tweets": tweets}
+    resp = {"shanyraks": shanyraks}
 
     return resp

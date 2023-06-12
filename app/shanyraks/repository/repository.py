@@ -5,27 +5,27 @@ from bson.objectid import ObjectId
 from pymongo.database import Database
 
 
-class TweetRepository:
+class ShanyrakRepository:
     def __init__(self, database: Database):
         self.database = database
 
-    def create_tweet(self, input: dict):
+    def create_shanyrak(self, input: dict):
         payload = {
             "content": input["content"],
             "user_id": ObjectId(input["user_id"]),
             "created_at": datetime.utcnow(),
         }
 
-        self.database["tweets"].insert_one(payload)
+        self.database["shanyraks"].insert_one(payload)
 
-    def get_tweet_by_user_id(self, user_id: str) -> List[dict]:
-        tweets = self.database["tweets"].find(
+    def get_shanyrak_by_user_id(self, user_id: str) -> List[dict]:
+        shanyraks = self.database["shanyraks"].find(
             {
                 "user_id": ObjectId(user_id),
             }
         )
         result = []
-        for tweet in tweets:
-            result.append(tweet)
+        for shanyrak in shanyraks:
+            result.append(shanyrak)
 
         return result
