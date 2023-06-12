@@ -1,37 +1,41 @@
 from fastapi import Depends, HTTPException, status
 
 from app.utils import AppModel
+from app.auth.utils import get_current_user_id
 
 from ..service import Service, get_service
 from . import router
 
 
 class UpdateUserRequest(AppModel):
-    email: str
-    password: str
+    phone: str
+    name: str
+    city: str
 
 
 class UpdateUserResponse(AppModel):
-    email: str
+    
 
 
 @router.patch(
     "/auth/users/me",
-    status_code=status.HTTP_200_OK,
-    response_model=UpdateUserResponse
+    status_code=status.HTTP_200_OK
 )
 def update_user(
-    user_id: int,
     input: UpdateUserRequest,
+    current_user_id: int = Depends(get_current_user_id),
     svc: Service = Depends(get_service)
-) -> dict[str, str]:
-    user = svc.repository.get_user_by_id(user_id)
+):
+    user = svc.repository.get_user_by_id(current_user_id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found."
         )
 
-    updated_user = svc.repository.update_user(user_id, input.dict())
-
-    return UpdateUserResponse(email=updated_user.email)
+    updated_data = {
+        "phone": input.phone,
+        "name": input.name,
+        "city": input.city
+    }
+    svc.repository.update_user(current_user_id, updated_data)
