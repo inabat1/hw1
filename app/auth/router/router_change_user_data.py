@@ -13,9 +13,6 @@ class UpdateUserRequest(AppModel):
     city: str
 
 
-class UpdateUserResponse(AppModel):
-    
-
 
 @router.patch(
     "/auth/users/me",
