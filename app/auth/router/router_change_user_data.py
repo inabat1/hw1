@@ -17,7 +17,7 @@ class UpdateUserResponse(AppModel):
 
 
 @router.patch(
-    "/auth/users/me",
+    "/users/me",
     status_code=status.HTTP_200_OK,
     response_model=UpdateUserResponse
 )
