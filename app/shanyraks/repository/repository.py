@@ -12,8 +12,8 @@ class ShanyrakRepository:
 
     def create_shanyrak(self, user_id: str, data: dict[str, Any]):
         data["user_id"] = ObjectId(user_id)
-        shanyrak = self.database["shanyraks"].insert_one(data)
-        return shanyrak.inserted_id
+        insert_result = self.database["shanyraks"].insert_one(data)
+        return insert_result.inserted_id
 
     def get_shanyrak(self, shanyrak_id:str, user_id:str)-> Optional[dict]:
         user = self.database["shanyraks"].find_one(
