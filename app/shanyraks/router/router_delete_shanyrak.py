@@ -19,7 +19,7 @@ class UpdateShanyrakRequest(AppModel):
 
 
 @router.delete("/{shanyrak_id: str}")
-def update_shanyrak(
+def delete_shanyrak(
     shanyrak_id: str,
     input: UpdateShanyrakRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
