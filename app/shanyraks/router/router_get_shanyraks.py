@@ -34,3 +34,6 @@ def get_shanyrak(
 ) -> dict[str, str]:
     shanyrak = svc.repository.get_shanyrak(shanyrak_id)
     return GetShanyrakResponse(**shanyrak)
+
+
+

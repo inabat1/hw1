@@ -3,6 +3,7 @@ from typing import List, Any, Optional
 
 from bson.objectid import ObjectId
 from pymongo.database import Database
+from pymongo.results import DeleteResult, UpdateResult
 
 
 class ShanyrakRepository:
@@ -19,3 +20,11 @@ class ShanyrakRepository:
             {"_id": ObjectId(shanyrak_id), "user_id": ObjectId(user_id)}
         )
         return user
+    
+    def update_shanyrak(self, shanyrak_id: str, user_id: str, data: dict()) -> UpdateResult:
+        return self.database["shanyraks"].update_one(
+            filter={"_id": ObjectId(shanyrak_id), "user_id":ObjectId(user_id)},
+            update={
+                "$set": data,
+            }
+        )
