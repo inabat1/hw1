@@ -1,4 +1,4 @@
-from fastapi import Depends, Response
+from fastapi import Depends, Response, status
 
 from app.utils import AppModel
 from ..adapters.jwt_service import JWTData
@@ -15,10 +15,10 @@ class UpdateUserRequest(AppModel):
 
 @router.patch("/users/me")
 def update_user_data(
-    data: UpdateUserRequest,
+    input: UpdateUserRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
-)->dict(str,str):
+) -> dict[str, str]:
     
-    svc.repository.update_user(jwt_data.user_id, data.dict())
+    svc.repository.update_user(jwt_data.user_id, input.dict())
     return Response(status_code=200)
