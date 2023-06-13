@@ -24,7 +24,7 @@ def create_shanyrak(
     input: CreateShanyrakRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
-) -> dict[str, str]:
+):
     shanyrak_id=svc.repository.create_shanyrak(jwt_data.user_id, input.dict())
 
     return CreateShanyrakResponse(id=shanyrak_id)
