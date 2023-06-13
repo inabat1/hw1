@@ -20,5 +20,5 @@ def update_user_data(
     svc: Service = Depends(get_service),
 ) -> dict[str, str]:
     
-    svc.repository.update_user(jwt_data.user_id, input.dict())
+    svc.repository.update_user(jwt_data.user_id)
     return Response(status_code=200)
