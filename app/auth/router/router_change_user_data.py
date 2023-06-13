@@ -13,7 +13,7 @@ class UpdateUserRequest(AppModel):
     city: str
 
 
-@router.patch("users/me", status_code=status.HTTP_200_OK)
+@router.patch("/auth/users/me", status_code=status.HTTP_200_OK)
 def update_user_data(
     data: UpdateUserRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
