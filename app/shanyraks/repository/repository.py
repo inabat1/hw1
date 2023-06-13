@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Any
 
 from bson.objectid import ObjectId
 from pymongo.database import Database
@@ -9,23 +9,11 @@ class ShanyrakRepository:
     def __init__(self, database: Database):
         self.database = database
 
-    def create_shanyrak(self, input: dict):
-        payload = {
-            "content": input["content"],
-            "user_id": ObjectId(input["user_id"]),
-            "created_at": datetime.utcnow(),
-        }
+    def create_shanyrak(self, user_id: str, data: dict[str, Any]):
+        data["user_id"] = ObjectId(user_id)
+        shanyrak = self.database["shanyraks"].insert_one(data)
 
-        self.database["shanyraks"].insert_one(payload)
+        return shanyrak.inserted_id
 
-    def get_shanyrak_by_user_id(self, user_id: str) -> List[dict]:
-        shanyraks = self.database["shanyraks"].find(
-            {
-                "user_id": ObjectId(user_id),
-            }
-        )
-        result = []
-        for shanyrak in shanyraks:
-            result.append(shanyrak)
-
-        return result
+    def get_shanyrak(self, shanyrak_id:str):
+        self.database["shanyraks"].find_one
