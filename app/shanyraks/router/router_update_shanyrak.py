@@ -18,10 +18,14 @@ class UpdateShanyrakRequest(AppModel):
 
 @router.patch("/{shanyrak_id}")
 def update_shanyrak(
+    shanyrak_id: str,
     input: UpdateShanyrakRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> dict[str, str]:
     
-    svc.repository.update_user(jwt_data.user_id, input.dict())
-    return Response(status_code=200)
+    update = svc.repository.update_shanyrak(shanyrak_id, jwt_data.user_id, input.dict())
+    if update.modified_count==1:
+        return Response(status_code=200)
+    return Response(status_code=404)
+    
