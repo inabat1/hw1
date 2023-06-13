@@ -19,7 +19,7 @@ class CreateShanyrakRequest(AppModel):
 class CreateShanyrakResponse(AppModel):
     id: Any = Field(alias="_id")
 
-@router.post("/")
+@router.post("/", response_model=CreateShanyrakResponse)
 def create_shanyrak(
     input: CreateShanyrakRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
