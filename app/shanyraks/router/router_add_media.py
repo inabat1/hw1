@@ -28,6 +28,6 @@ def add_media(
     file.filename: str - Название файла
     file.file: BytesIO - Содержимое файла
     """
-    url = svc.s3_service.upload_file(file.file, file.filename)
+    #url = svc.s3_service.upload_file(file.file, file.filename)
     
     return {"msg": "inserted"}
