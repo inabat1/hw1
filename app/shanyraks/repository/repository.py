@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import List, Any, Optional
+from app.auth.adapters.s3_service import S3Service
 
 from bson.objectid import ObjectId
 from pymongo.database import Database
@@ -9,6 +10,7 @@ from pymongo.results import DeleteResult, UpdateResult
 class ShanyrakRepository:
     def __init__(self, database: Database):
         self.database = database
+        self.s3_service = S3Service()
 
     def create_shanyrak(self, user_id: str, data: dict[str, Any]):
         data["user_id"] = ObjectId(user_id)
@@ -33,5 +35,9 @@ class ShanyrakRepository:
         return self.database["shanyraks"].delete_one(
             {"_id": ObjectId(shanyrak_id), "user_id":ObjectId(user_id)}
         )
+    
+    
+        
+
     
     #def add_media_shanyrak(self, shanyrak_id: str, user_id:str, data: dict())

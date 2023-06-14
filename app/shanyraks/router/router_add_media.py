@@ -30,4 +30,4 @@ def add_media(
     """
     url = svc.s3_service.upload_file(file.file, file.filename)
     
-    return {"msg": url}
+    return {"msg": "inserted"}
