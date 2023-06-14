@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Any, Optional
-#from adapters.s3_service import S3Service
+
 
 from bson.objectid import ObjectId
 from pymongo.database import Database
@@ -36,8 +36,3 @@ class ShanyrakRepository:
             {"_id": ObjectId(shanyrak_id), "user_id":ObjectId(user_id)}
         )
     
-    
-        
-
-    
-    #def add_media_shanyrak(self, shanyrak_id: str, user_id:str, data: dict())

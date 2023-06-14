@@ -9,14 +9,6 @@ from ..service import Service, get_service
 from . import router
 
 
-class CreateShanyrakRequest(AppModel):
-    type: str
-    price: int
-    address: str
-    area: float
-    rooms_count: int
-    description: str
-
 
 
 @router.post("/{shanyrak_id:str}/media")
@@ -24,10 +16,7 @@ def upload_file(
     file: UploadFile,
     svc: Service = Depends(get_service),
 ):
-    """
-    file.filename: str - Название файла
-    file.file: BytesIO - Содержимое файла
-    """
+   
     svc.s3_service.upload_file(file.file, file.filename)
     
     return {"msg": "inserted"}

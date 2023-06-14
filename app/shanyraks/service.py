@@ -5,16 +5,15 @@ from .repository.repository import ShanyrakRepository
 
 class Service:
     def __init__(
-        self,
-        repository: ShanyrakRepository,
+        self
     ):
-        self.repository = repository
+        #self.repository = repository
         self.s3_service = S3Service()
 
 
 def get_service():
-    repository = ShanyrakRepository(database)
+    #repository = ShanyrakRepository(database)
     
 
-    svc = Service(repository)
+    svc = Service()
     return svc
