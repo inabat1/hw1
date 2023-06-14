@@ -18,7 +18,7 @@ class UpdateShanyrakRequest(AppModel):
     description: str
 
 
-@router.delete("/{shanyrak_id: str}")
+@router.delete("/{shanyrak_id:str}")
 def delete_shanyrak(
     shanyrak_id: str,
     input: UpdateShanyrakRequest,

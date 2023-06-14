@@ -18,7 +18,7 @@ class UpdateShanyrakRequest(AppModel):
     description: str
 
 
-@router.patch("/{shanyrak_id: str}")
+@router.patch("/{shanyrak_id:str}")
 def update_shanyrak(
     shanyrak_id: str,
     input: UpdateShanyrakRequest,
