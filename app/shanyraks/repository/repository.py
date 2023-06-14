@@ -10,7 +10,7 @@ from pymongo.results import DeleteResult, UpdateResult
 class ShanyrakRepository:
     def __init__(self, database: Database):
         self.database = database
-        self.s3_service = S3Service()
+        
 
     def create_shanyrak(self, user_id: str, data: dict[str, Any]):
         data["user_id"] = ObjectId(user_id)
