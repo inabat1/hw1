@@ -20,7 +20,7 @@ class CreateShanyrakRequest(AppModel):
 
 
 @router.post("/{shanyrak_id:str}/media")
-def add_media(
+def upload_file(
     file: UploadFile,
     svc: Service = Depends(get_service),
 ):
@@ -28,6 +28,6 @@ def add_media(
     file.filename: str - Название файла
     file.file: BytesIO - Содержимое файла
     """
-    #url = svc.s3_service.upload_file(file.file, file.filename)
+    svc.s3_service.upload_file(file.file, file.filename)
     
     return {"msg": "inserted"}
