@@ -24,6 +24,7 @@ class GetShanyrakResponse(AppModel):
     area: float
     rooms_count: int
     description: str
+    images: List[str] = []
 
 
 @router.get("/{shanyrak_id:str}", response_model=GetShanyrakResponse)
@@ -32,7 +33,7 @@ def get_shanyrak(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> dict[str, str]:
-    shanyrak = svc.repository.get_shanyrak(shanyrak_id)
+    shanyrak = svc.repository.get_shanyrak(shanyrak_id, jwt_data.user_id)
     return GetShanyrakResponse(**shanyrak)
 
 

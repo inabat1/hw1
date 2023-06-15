@@ -36,3 +36,8 @@ class ShanyrakRepository:
             {"_id": ObjectId(shanyrak_id), "user_id":ObjectId(user_id)}
         )
     
+    def add_images_to_shanyrak(self, shanyrak_id: str, user_id: str, urls: List[str]) -> UpdateResult:
+        return self.database["shanyraks"].update_one(
+            filter={"_id": ObjectId(shanyrak_id), "user_id": ObjectId(user_id)},
+            update={"$push": {"images": {"$each": urls}}}
+        )
