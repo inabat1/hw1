@@ -17,7 +17,7 @@ class UpdateShanyrakRequest(AppModel):
     rooms_count: int
     description: str
 
-
+#delete all images
 @router.delete("/{shanyrak_id:str}/media")
 def delete_shanyrak_image(
     shanyrak_id: str,
