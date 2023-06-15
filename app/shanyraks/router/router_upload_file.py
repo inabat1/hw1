@@ -24,7 +24,5 @@ def upload_file(
         url = svc.s3_service.upload_file(file.file, file.filename)
         result.append(url)
 
-    #entity = svc.repository.get_shanyrak(shanyrak_id)
-    #entity.items.append({"url": url})
     svc.repository.add_images_to_shanyrak(shanyrak_id, jwt_data.user_id, result)
     return Response(status_code=200)

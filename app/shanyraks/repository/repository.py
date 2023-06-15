@@ -41,3 +41,9 @@ class ShanyrakRepository:
             filter={"_id": ObjectId(shanyrak_id), "user_id": ObjectId(user_id)},
             update={"$push": {"images": {"$each": urls}}}
         )
+    
+    def delete_all_images_from_shanyrak(self, shanyrak_id: str, user_id: str) -> UpdateResult:
+        return self.database["shanyraks"].update_one(
+            filter={"_id": ObjectId(shanyrak_id), "user_id": ObjectId(user_id)},
+            update={"$unset": {"images": ""}}
+        )
