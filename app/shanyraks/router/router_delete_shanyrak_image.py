@@ -17,14 +17,14 @@ class UpdateShanyrakRequest(AppModel):
     rooms_count: int
     description: str
 
-#delete all images
+
 @router.delete("/{shanyrak_id:str}/media")
 def delete_shanyrak_image(
     shanyrak_id: str,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> Response:
-    result = svc.repository.delete_all_images_from_shanyrak(shanyrak_id, jwt_data.user_id)
+    result = svc.repository.delete_images_from_shanyrak(shanyrak_id, jwt_data.user_id)
     
     if result.modified_count == 0:
         return Response(status_code=404, content="No images found")
